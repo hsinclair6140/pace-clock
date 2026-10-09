@@ -188,11 +188,11 @@ function parse(text){
 let saved=[];try{saved=JSON.parse(localStorage.getItem('paceclock.saved')||'[]')}catch(e){}
 const persist=()=>{try{localStorage.setItem('paceclock.saved',JSON.stringify(saved))}catch(e){}};
 const allPlans=()=>[...PRESETS.map(t=>({t,pre:true})),...saved.map(t=>({t,pre:false}))];
-let activeText=PRESETS[0];try{const a=localStorage.getItem('paceclock.active.v3');if(a&&parse(a).errs.length===0)activeText=a}catch(e){}
+let activeText=PRESETS[0];try{const a=localStorage.getItem('paceclock.active.v4');if(a&&parse(a).errs.length===0)activeText=a}catch(e){}
 
 let P, running=false, startAt=0, pausedAt=0, pre=0, actual=[], lastIdx=-1, timer=null, wake=null, beeped={};
 function loadPlan(text){
-  P=parse(text).plan; activeText=text; try{localStorage.setItem('paceclock.active.v3',text)}catch(e){}
+  P=parse(text).plan; activeText=text; try{localStorage.setItem('paceclock.active.v4',text)}catch(e){}
   $('pTitle').textContent=P.title;
   $('pSub').textContent=`${fmt(P.cap)} cap${P.goal?' · goal '+P.goal:''} · ${P.segs.length} pieces`;
   doReset();
