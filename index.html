@@ -145,6 +145,25 @@ function build(title,cap,goal,times){
   return lines.join('\n');
 }
 const PRESETS=[
+  `# FOTC Wk2 · 4 RFT 11:55
+cap 18:00
+goal 11:55
+0:53  R1  15 Cal Row // 1100 cal/hr, ~1:55/500m
+1:34  R1  15 DB Hang Snatch arm 1 // unbroken, 0:38, then switch
+2:10  R1  15 DB Hang Snatch arm 2 // unbroken, 0:36
+2:55  R1  15 Toes-to-Bar // 8, 5s break, 7
+3:53  R2  15 Cal Row // 1100 cal/hr, ~1:55/500m
+4:34  R2  15 DB Hang Snatch arm 1 // unbroken, 0:38, then switch
+5:10  R2  15 DB Hang Snatch arm 2 // unbroken, 0:36
+5:55  R2  15 Toes-to-Bar // 8, 5s break, 7
+6:53  R3  15 Cal Row // 1100 cal/hr, ~1:55/500m
+7:34  R3  15 DB Hang Snatch arm 1 // unbroken, 0:38, then switch
+8:10  R3  15 DB Hang Snatch arm 2 // unbroken, 0:36
+8:55  R3  15 Toes-to-Bar // 8, 5s break, 7
+9:53  R4  15 Cal Row // 1100 cal/hr, ~1:55/500m
+10:34  R4  15 DB Hang Snatch arm 1 // unbroken, 0:38, then switch
+11:10  R4  15 DB Hang Snatch arm 2 // unbroken, 0:36
+11:55  R4  15 Toes-to-Bar // 8, 5s break, 7, empty the tank`,
   `# FOTC Wk2 · Test Round 2:53
 cap 3:30
 goal 2:53
@@ -188,11 +207,11 @@ function parse(text){
 let saved=[];try{saved=JSON.parse(localStorage.getItem('paceclock.saved')||'[]')}catch(e){}
 const persist=()=>{try{localStorage.setItem('paceclock.saved',JSON.stringify(saved))}catch(e){}};
 const allPlans=()=>[...PRESETS.map(t=>({t,pre:true})),...saved.map(t=>({t,pre:false}))];
-let activeText=PRESETS[0];try{const a=localStorage.getItem('paceclock.active.v4');if(a&&parse(a).errs.length===0)activeText=a}catch(e){}
+let activeText=PRESETS[0];try{const a=localStorage.getItem('paceclock.active.v5');if(a&&parse(a).errs.length===0)activeText=a}catch(e){}
 
 let P, running=false, startAt=0, pausedAt=0, pre=0, actual=[], lastIdx=-1, timer=null, wake=null, beeped={};
 function loadPlan(text){
-  P=parse(text).plan; activeText=text; try{localStorage.setItem('paceclock.active.v4',text)}catch(e){}
+  P=parse(text).plan; activeText=text; try{localStorage.setItem('paceclock.active.v5',text)}catch(e){}
   $('pTitle').textContent=P.title;
   $('pSub').textContent=`${fmt(P.cap)} cap${P.goal?' · goal '+P.goal:''} · ${P.segs.length} pieces`;
   doReset();
